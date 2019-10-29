@@ -1,6 +1,6 @@
 Goal of this library is to provide feature-rich but extensible base for various minigames, to make development faster and easier.
 
-##TODO list:
+## TODO list:
 
 - [ ] Arena management
 - [ ] Arena configuration management
