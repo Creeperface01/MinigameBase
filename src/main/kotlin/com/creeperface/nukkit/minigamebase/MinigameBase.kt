@@ -30,7 +30,7 @@ abstract class MinigameBase<
     internal var playerDataFactory: (Player) -> D //TODO: add more arguments?
         private set
 
-    internal var playerArenaDataFactory: (Player, BaseArena<A, D, DA>) -> D //TODO: add more arguments?
+    internal var playerArenaDataFactory: (Player, BaseArena<A, D, DA>) -> DA //TODO: add more arguments?
         private set
 
     internal var arenaFactory: () -> BaseArena<A, D, DA> //TODO: add more arguments
@@ -69,11 +69,13 @@ abstract class MinigameBase<
             dataConstructor.call(p)
         }
 
-        val arenaDataConstructor = playerData.findConstructor(
+        println(0)
+        val arenaDataConstructor = arenaPlayerData.findConstructor(
             Player::class.createType(),
-            BaseArena::class.createType()
+            arena.createType()
         )
 
+        println(1)
         playerArenaDataFactory = { p, a ->
             arenaDataConstructor.call(p, a)
         }
@@ -83,6 +85,8 @@ abstract class MinigameBase<
         arenaFactory = {
             arenaConstructor.call()
         }
+
+        println(2)
     }
 
     fun setPlayerDataFactory(factory: (Player) -> D) {
